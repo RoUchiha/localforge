@@ -1,0 +1,29 @@
+{
+  "name": "domain-specialist-7b",
+  "task_type": "instruction_following",
+  "base_model": "Qwen/Qwen2.5-7B-Instruct",
+  "rationale": [
+    "A 7B-class base offers more capacity for nuanced domain behavior.",
+    "QLoRA targets a single 24 GB NVIDIA GPU while keeping the adapter small."
+  ],
+  "data_format": "conversational prompt-completion JSONL",
+  "recipe": {
+    "method": "qlora",
+    "epochs": 2,
+    "learning_rate": 0.0001,
+    "batch_size": 1,
+    "gradient_accumulation_steps": 16,
+    "lora_rank": 32,
+    "lora_alpha": 64,
+    "max_sequence_length": 4096,
+    "quantization_bits": 4
+  },
+  "evaluation_gates": [
+    {"metric": "task_accuracy", "threshold": 0.9, "direction": "gte", "required": true},
+    {"metric": "regression_rate", "threshold": 0.03, "direction": "lte", "required": true},
+    {"metric": "pii_leakage_count", "threshold": 0, "direction": "lte", "required": true}
+  ],
+  "deployment_target": "vllm",
+  "warnings": ["Verify the installed bitsandbytes build and run a short smoke job before a full dataset."],
+  "source": "preset"
+}

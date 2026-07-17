@@ -1,0 +1,29 @@
+{
+  "name": "support-specialist",
+  "task_type": "instruction_following",
+  "base_model": "Qwen/Qwen2.5-3B-Instruct",
+  "rationale": [
+    "QLoRA keeps a 3B-class model practical on a 12 GB GPU.",
+    "A small adapter is easy to version and package separately from base weights."
+  ],
+  "data_format": "conversational JSONL using messages",
+  "recipe": {
+    "method": "qlora",
+    "epochs": 3,
+    "learning_rate": 0.0002,
+    "batch_size": 1,
+    "gradient_accumulation_steps": 16,
+    "lora_rank": 16,
+    "lora_alpha": 32,
+    "max_sequence_length": 2048,
+    "quantization_bits": 4
+  },
+  "evaluation_gates": [
+    {"metric": "task_accuracy", "threshold": 0.85, "direction": "gte", "required": true},
+    {"metric": "regression_rate", "threshold": 0.05, "direction": "lte", "required": true},
+    {"metric": "pii_leakage_count", "threshold": 0, "direction": "lte", "required": true}
+  ],
+  "deployment_target": "ollama",
+  "warnings": [],
+  "source": "preset"
+}

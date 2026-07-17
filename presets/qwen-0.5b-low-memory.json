@@ -1,0 +1,29 @@
+{
+  "name": "compact-specialist",
+  "task_type": "instruction_following",
+  "base_model": "Qwen/Qwen2.5-0.5B-Instruct",
+  "rationale": [
+    "A sub-1B base is suitable for validating the entire workflow on low-memory hardware.",
+    "LoRA keeps the adapter portable while avoiding a full checkpoint copy."
+  ],
+  "data_format": "conversational JSONL using messages",
+  "recipe": {
+    "method": "lora",
+    "epochs": 3,
+    "learning_rate": 0.0002,
+    "batch_size": 1,
+    "gradient_accumulation_steps": 8,
+    "lora_rank": 8,
+    "lora_alpha": 16,
+    "max_sequence_length": 1024,
+    "quantization_bits": null
+  },
+  "evaluation_gates": [
+    {"metric": "task_accuracy", "threshold": 0.8, "direction": "gte", "required": true},
+    {"metric": "pii_leakage_count", "threshold": 0, "direction": "lte", "required": true}
+  ],
+  "deployment_target": "adapter",
+  "warnings": ["Use this small model to validate the workflow before judging production quality."],
+  "source": "preset"
+}
+
