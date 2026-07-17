@@ -2,6 +2,8 @@
 
 **Describe the model you need. Review the plan. Tune, evaluate, and package it on your own machine.**
 
+[Open the fully interactive live demo](https://localforge-studio.rosingh95.chatgpt.site) · [View the public repository](https://github.com/RoUchiha/localforge)
+
 LocalForge is a local-first model workshop for teams that cannot justify sending private data to a hosted model—or paying hosted-model latency and token costs forever. A natural-language goal becomes a typed, reviewable training plan. The same project then carries the dataset audit, fine-tuning recipe, evaluation gates, checkpoint, and release manifest from idea to deployment.
 
 The repository contains two cooperating applications:
@@ -9,7 +11,7 @@ The repository contains two cooperating applications:
 - **Studio** — the guided web interface under `app/`.
 - **Engine** — the loopback-only Python API and CLI under `src/localforge/`.
 
-The hosted Studio is an interactive product tour. Real datasets and training jobs run only when Studio is opened locally beside the Engine.
+The hosted Studio is an interactive product tour. It generates plans and downloadable artifacts, inspects uploaded JSONL or CSV files inside the browser, exposes tuning trade-offs, and walks through evaluation and packaging. GPU training, model inference, benchmark measurements, and adapter weights are clearly simulated in the hosted tour. Those operations are real when Studio runs locally beside the Engine.
 
 ## What works
 
@@ -162,4 +164,3 @@ python -m compileall -q src
 ## License
 
 Copyright © 2026 RoUchiha. All rights reserved. This repository is source-available for evaluation and portfolio review only; see [LICENSE](LICENSE) and [NOTICE](NOTICE).
-

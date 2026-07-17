@@ -19,7 +19,7 @@ test("server-renders the LocalForge studio", async () => {
   const html = await response.text();
   assert.match(html, /<title>LocalForge/);
   assert.match(html, /Shape a model around your work/);
-  assert.match(html, /Stays on device/);
+  assert.match(html, /Browser-only demo/);
+  assert.match(html, /GPU training and model outputs are simulated/);
   assert.doesNotMatch(html, /codex-preview|react-loading-skeleton|Starter Project/);
 });
-
